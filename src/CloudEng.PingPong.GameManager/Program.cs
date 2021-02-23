@@ -1,12 +1,34 @@
-﻿using System;
+﻿using System.IO;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace CloudEng.PingPong.GameManager
 {
     public static class Program
     {
-        static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            using var host = CreateHostBuilder(args).Build();
+
+            await host.RunAsync().ConfigureAwait(false);
         }
+
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostContext, configuration) =>
+                    {
+                        configuration.Sources.Clear();
+
+                        configuration
+                            .SetBasePath(Directory.GetCurrentDirectory())
+                            .AddJsonFile("appsettings.json", true, true)
+                            .AddEnvironmentVariables();
+                    }
+                )
+                .ConfigureServices(ConfigureServices);
+        private static void ConfigureServices(HostBuilderContext hostContext, IServiceCollection services) => services.AddHostedService<GameManagerService>();
+
     }
 }
