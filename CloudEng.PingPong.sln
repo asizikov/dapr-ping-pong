@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{94A05B2C-D1F9-474B-9427-3EA3E6929BAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8710D3C2-A7B9-4E34-B450-7B95BF627E34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastructure", "infrastructure", "{71A797DB-C44E-4D0E-8411-1A5DA6444650}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployments", "deployments", "{1A7515BE-C8DA-4946-8EAE-137657C4F54E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudEng.PingPong.GameManager", "src\CloudEng.PingPong.GameManager\CloudEng.PingPong.GameManager.csproj", "{38505208-2B6E-43FE-9E25-CB13164716F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudEng.PingPong.Player", "src\CloudEng.PingPong.Player\CloudEng.PingPong.Player.csproj", "{DB7578C9-77ED-4C98-99A6-950AB53BEA18}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{38505208-2B6E-43FE-9E25-CB13164716F4} = {94A05B2C-D1F9-474B-9427-3EA3E6929BAA}
+		{DB7578C9-77ED-4C98-99A6-950AB53BEA18} = {94A05B2C-D1F9-474B-9427-3EA3E6929BAA}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38505208-2B6E-43FE-9E25-CB13164716F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38505208-2B6E-43FE-9E25-CB13164716F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38505208-2B6E-43FE-9E25-CB13164716F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38505208-2B6E-43FE-9E25-CB13164716F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB7578C9-77ED-4C98-99A6-950AB53BEA18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB7578C9-77ED-4C98-99A6-950AB53BEA18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB7578C9-77ED-4C98-99A6-950AB53BEA18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB7578C9-77ED-4C98-99A6-950AB53BEA18}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
