@@ -1,0 +1,16 @@
+version: '3.4'
+services:
+  cloud-eng-ping-pong-gamemanager:
+    environment:
+        - CONFIG_VA=test
+
+  cloud-eng-pingpong-player-a:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace CloudEng.PingPong.Player.Controllers
@@ -12,6 +14,13 @@ namespace CloudEng.PingPong.Player.Controllers
         public GameController(ILogger<GameController> logger)
         {
             _logger = logger;
+        }
+
+        [HttpPost("start")]
+        public async Task<IActionResult> StartAsync(CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("Starting");
+            return new OkResult();
         }
     }
 }

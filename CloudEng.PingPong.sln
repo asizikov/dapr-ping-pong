@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{94A05B2C-D1F9-474B-9427-3EA3E6929BAA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8710D3C2-A7B9-4E34-B450-7B95BF627E34}"
@@ -8,18 +11,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastructure", "infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployments", "deployments", "{1A7515BE-C8DA-4946-8EAE-137657C4F54E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudEng.PingPong.GameManager", "src\CloudEng.PingPong.GameManager\CloudEng.PingPong.GameManager.csproj", "{38505208-2B6E-43FE-9E25-CB13164716F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudEng.PingPong.GameManager", "src\CloudEng.PingPong.GameManager\CloudEng.PingPong.GameManager.csproj", "{38505208-2B6E-43FE-9E25-CB13164716F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudEng.PingPong.Player", "src\CloudEng.PingPong.Player\CloudEng.PingPong.Player.csproj", "{DB7578C9-77ED-4C98-99A6-950AB53BEA18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudEng.PingPong.Player", "src\CloudEng.PingPong.Player\CloudEng.PingPong.Player.csproj", "{DB7578C9-77ED-4C98-99A6-950AB53BEA18}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{B71B9F94-60FF-47B7-9B40-CE157BB121F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{38505208-2B6E-43FE-9E25-CB13164716F4} = {94A05B2C-D1F9-474B-9427-3EA3E6929BAA}
-		{DB7578C9-77ED-4C98-99A6-950AB53BEA18} = {94A05B2C-D1F9-474B-9427-3EA3E6929BAA}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{38505208-2B6E-43FE-9E25-CB13164716F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -30,5 +31,20 @@ Global
 		{DB7578C9-77ED-4C98-99A6-950AB53BEA18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB7578C9-77ED-4C98-99A6-950AB53BEA18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB7578C9-77ED-4C98-99A6-950AB53BEA18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B71B9F94-60FF-47B7-9B40-CE157BB121F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B71B9F94-60FF-47B7-9B40-CE157BB121F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B71B9F94-60FF-47B7-9B40-CE157BB121F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B71B9F94-60FF-47B7-9B40-CE157BB121F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{38505208-2B6E-43FE-9E25-CB13164716F4} = {94A05B2C-D1F9-474B-9427-3EA3E6929BAA}
+		{DB7578C9-77ED-4C98-99A6-950AB53BEA18} = {94A05B2C-D1F9-474B-9427-3EA3E6929BAA}
+		{B71B9F94-60FF-47B7-9B40-CE157BB121F9} = {94A05B2C-D1F9-474B-9427-3EA3E6929BAA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D56FAB9B-8777-4F66-9743-A5DA3D2CF08E}
 	EndGlobalSection
 EndGlobal

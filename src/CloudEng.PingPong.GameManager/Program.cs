@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
+using Dapr.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,7 +29,12 @@ namespace CloudEng.PingPong.GameManager
                     }
                 )
                 .ConfigureServices(ConfigureServices);
-        private static void ConfigureServices(HostBuilderContext hostContext, IServiceCollection services) => services.AddHostedService<GameManagerService>();
+
+        private static void ConfigureServices(HostBuilderContext hostContext, IServiceCollection services)
+        {
+            services.AddHostedService<GameManagerService>();
+            services.AddSingleton(_ => new DaprClientBuilder().Build());
+        }
 
     }
 }

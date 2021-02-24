@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  cloud-eng-ping-pong-gamemanager:
+    image: cloudengnl/ping-pong-gamemanager
+    build:
+      context: .
+      dockerfile: src/CloudEng.PingPong.GameManager/Dockerfile
+    ports:
+      - "51000:50001"
+
+  cloud-eng-ping-pong-gamemanager-dapr:
+    image: "daprio/daprd:1.0.0"
+    command: ["./daprd", "-app-id", "cloud-eng-ping-pong-gamemanager", "-app-port", "80"]
+    depends_on:
+      - cloud-eng-ping-pong-gamemanager
+    network_mode: "service:cloud-eng-ping-pong-gamemanager"
+
+  cloud-eng-pingpong-player-a:
+    image: cloudengnl/pingpong-player
+    build:
+      context: .
+      dockerfile: src/CloudEng.PingPong.Player/Dockerfile
+    ports:
+      - "52000:50001"
+
+  cloud-eng-pingpong-player-a-dapr:
+    image: "daprio/daprd:1.0.0"
+    command: ["./daprd", "-app-id", "cloud-eng-pingpong-player-a", "-app-port", "80"]
+    depends_on:
+      - cloud-eng-pingpong-player-a
+    network_mode: "service:cloud-eng-pingpong-player-a"

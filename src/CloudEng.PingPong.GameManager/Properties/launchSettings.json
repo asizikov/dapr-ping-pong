@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CloudEng.PingPong.GameManager": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
