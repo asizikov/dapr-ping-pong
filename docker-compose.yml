@@ -8,10 +8,19 @@ services:
       dockerfile: src/CloudEng.PingPong.GameManager/Dockerfile
     ports:
       - "51000:50001"
+    depends_on:
+      - redis
+    networks:
+      - cloud-eng-ping-pong-ntwrk
 
   cloud-eng-ping-pong-gamemanager-dapr:
     image: "daprio/daprd:1.0.0"
-    command: ["./daprd", "-app-id", "cloud-eng-ping-pong-gamemanager", "-app-port", "80"]
+    command: ["./daprd", 
+        "-app-id", "cloud-eng-ping-pong-gamemanager", 
+        "-app-port", "80"
+    ]
+    volumes:
+      - "./src/CloudEng.PingPong.GameManager/components:/components:ro"
     depends_on:
       - cloud-eng-ping-pong-gamemanager
     network_mode: "service:cloud-eng-ping-pong-gamemanager"
@@ -23,10 +32,28 @@ services:
       dockerfile: src/CloudEng.PingPong.Player/Dockerfile
     ports:
       - "52000:50001"
+    networks:
+      - cloud-eng-ping-pong-ntwrk
+
 
   cloud-eng-pingpong-player-a-dapr:
     image: "daprio/daprd:1.0.0"
-    command: ["./daprd", "-app-id", "cloud-eng-pingpong-player-a", "-app-port", "80"]
+    command: ["./daprd", 
+        "-app-id", "cloud-eng-pingpong-player-a", 
+        "-app-port", "80"
+    ]
     depends_on:
       - cloud-eng-pingpong-player-a
     network_mode: "service:cloud-eng-pingpong-player-a"
+
+  # External services
+  redis:
+    image: "redis:6.2.0-alpine"
+    ports:
+      - "6379"
+    networks:
+      - cloud-eng-ping-pong-ntwrk
+
+networks:
+  cloud-eng-ping-pong-ntwrk:
+    driver: bridge
