@@ -17,7 +17,8 @@ services:
     image: "daprio/daprd:1.0.0"
     command: ["./daprd", 
         "-app-id", "cloud-eng-ping-pong-gamemanager", 
-        "-app-port", "80"
+        "-app-port", "80",
+        "-components-path", "/components"
     ]
     volumes:
       - "./src/CloudEng.PingPong.GameManager/components:/components:ro"

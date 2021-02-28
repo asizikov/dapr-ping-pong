@@ -22,23 +22,13 @@ namespace CloudEng.PingPong.GameManager
             _logger.LogInformation("Game Manager Started");
             while (!stoppingToken.IsCancellationRequested)
             {
-                var gameScore = await _daprClient.GetStateAsync<GameScore>("game-store","score");
-                _logger.LogInformation($"Current Score {gameScore}");
+                var gameScore = await _daprClient.GetStateAsync<GameScore>("game-store","score", ConsistencyMode.Strong, cancellationToken: stoppingToken);
+                _logger.LogInformation($"Current Score. Player A : {gameScore.PlayerA} ; PlayerB: {gameScore.PlayerB}");
                 //await _daprClient.InvokeMethodAsync<object>("cloud-eng-pingpong-player-a", "game.start", null, stoppingToken);
                 await Task.Delay(1000, stoppingToken);
                 gameScore.PlayerA++;
-                await _daprClient.SaveStateAsync("game-store", "score", gameScore );
+                await _daprClient.SaveStateAsync("game-store", "score", gameScore , cancellationToken: stoppingToken);
             }
         }
     }
-
-    public class GameScore
-    {
-        public int PlayerA { get; set; } 
-        public int PlayerB
-        {
-            get;
-            set;
-        }
-    } 
 }
