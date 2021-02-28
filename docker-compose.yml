@@ -10,6 +10,7 @@ services:
       - "51000:50001"
     depends_on:
       - redis
+      - cloud-eng-pingpong-player-a
     networks:
       - cloud-eng-ping-pong-ntwrk
 
@@ -33,6 +34,10 @@ services:
       dockerfile: src/CloudEng.PingPong.Player/Dockerfile
     ports:
       - "52000:50001"
+    environment:
+        - PlayerName=player-a
+    depends_on:
+      - redis
     networks:
       - cloud-eng-ping-pong-ntwrk
 
@@ -41,8 +46,11 @@ services:
     image: "daprio/daprd:1.0.0"
     command: ["./daprd", 
         "-app-id", "cloud-eng-pingpong-player-a", 
-        "-app-port", "80"
+        "-app-port", "80",
+        "-components-path", "/components"
     ]
+    volumes:
+      - "./src/CloudEng.PingPong.Player/components:/components:ro"
     depends_on:
       - cloud-eng-pingpong-player-a
     network_mode: "service:cloud-eng-pingpong-player-a"

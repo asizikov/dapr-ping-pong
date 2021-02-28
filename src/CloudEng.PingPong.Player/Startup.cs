@@ -17,7 +17,9 @@ namespace CloudEng.PingPong.Player
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddSingleton<IPlayerLoop, PlayerLoop>();
+            services.AddControllers()
+                .AddDapr();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -27,7 +29,6 @@ namespace CloudEng.PingPong.Player
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }

@@ -32,9 +32,9 @@ namespace CloudEng.PingPong.GameManager
 
         private static void ConfigureServices(HostBuilderContext hostContext, IServiceCollection services)
         {
+            services.AddSingleton<IGameManagerLoop, GameManagerLoop>();
             services.AddHostedService<GameManagerService>();
             services.AddSingleton(_ => new DaprClientBuilder().Build());
         }
-
     }
 }
