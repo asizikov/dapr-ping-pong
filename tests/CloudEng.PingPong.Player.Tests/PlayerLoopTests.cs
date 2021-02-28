@@ -10,10 +10,11 @@ namespace CloudEng.PingPong.Player.Tests
 {
     public class PlayerLoopTests
     {
-        private PlayerLoop _playerLoop;
-        private Mock<DaprClient> _mockDaprClient;
+        private readonly PlayerLoop _playerLoop;
+        private readonly Mock<DaprClient> _mockDaprClient;
         private const string PlayerName = "player-x";
-        private CancellationToken _token = CancellationToken.None;
+        private readonly CancellationToken _token = CancellationToken.None;
+
         public PlayerLoopTests()
         {
             _mockDaprClient = new Mock<DaprClient>();
