@@ -1,5 +1,8 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
+using CloudEng.PingPong.Messaging;
+using Dapr;
 using Dapr.Client;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -23,19 +26,23 @@ namespace CloudEng.PingPong.Player.Controllers
             _playerName = _configuration.GetValue<string>("PlayerName");
         }
 
-        [HttpPost("start")]
-        public async Task<IActionResult> StartAsync(CancellationToken cancellationToken)
+        [HttpPost("gameEvent")]
+        [Topic(PubSub.GameMessaging, Topics.GameCommands)]
+        public async Task<IActionResult> StartAsync(GameControlEvent gameEvent,CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Starting");
-            await SetStateAsync(State.MyTurn, cancellationToken);
-            return new OkResult();
-        }
-
-        [HttpPost("stop")]
-        public async Task<IActionResult> StopAsync(CancellationToken cancellationToken)
-        {
-            _logger.LogInformation("Stopping");
-            await SetStateAsync(State.Ready, cancellationToken);
+            _logger.LogInformation("Received {Command}", gameEvent.Command);
+            switch (gameEvent.Command)
+            {
+                case GameCommand.Start:
+                    await SetStateAsync(State.MyTurn, cancellationToken);
+                    break;
+                case GameCommand.Stop:
+                    await SetStateAsync(State.Ready, cancellationToken);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
             return new OkResult();
         }
 

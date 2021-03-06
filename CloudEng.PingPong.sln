@@ -17,15 +17,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudEng.PingPong.Player", 
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{B71B9F94-60FF-47B7-9B40-CE157BB121F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudEng.PingPong.GameManager.Tests", "tests\CloudEng.PingPong.GameManager.Tests\CloudEng.PingPong.GameManager.Tests.csproj", "{014EEB93-4BE5-4FCF-A920-4AC0163A93AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudEng.PingPong.GameManager.Tests", "tests\CloudEng.PingPong.GameManager.Tests\CloudEng.PingPong.GameManager.Tests.csproj", "{014EEB93-4BE5-4FCF-A920-4AC0163A93AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudEng.PingPong.Player.Tests", "tests\CloudEng.PingPong.Player.Tests\CloudEng.PingPong.Player.Tests.csproj", "{1DDCFC97-92A1-450B-B33D-E319EAD06FF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudEng.PingPong.Player.Tests", "tests\CloudEng.PingPong.Player.Tests\CloudEng.PingPong.Player.Tests.csproj", "{1DDCFC97-92A1-450B-B33D-E319EAD06FF2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "components", "components", "{D81D2BFB-390D-43B0-9A4E-17361258C120}"
 	ProjectSection(SolutionItems) = preProject
+		infrastructure\components\game-messaging.yaml = infrastructure\components\game-messaging.yaml
 		infrastructure\components\game-store.yaml = infrastructure\components\game-store.yaml
 		infrastructure\components\player-state-store.yaml = infrastructure\components\player-state-store.yaml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudEng.PingPong.Messaging", "src\CloudEng.PingPong.Messaging\CloudEng.PingPong.Messaging.csproj", "{25E1D552-4114-4F0D-8021-D836AEADC883}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +56,10 @@ Global
 		{1DDCFC97-92A1-450B-B33D-E319EAD06FF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DDCFC97-92A1-450B-B33D-E319EAD06FF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DDCFC97-92A1-450B-B33D-E319EAD06FF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25E1D552-4114-4F0D-8021-D836AEADC883}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25E1D552-4114-4F0D-8021-D836AEADC883}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25E1D552-4114-4F0D-8021-D836AEADC883}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25E1D552-4114-4F0D-8021-D836AEADC883}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +71,7 @@ Global
 		{014EEB93-4BE5-4FCF-A920-4AC0163A93AC} = {8710D3C2-A7B9-4E34-B450-7B95BF627E34}
 		{1DDCFC97-92A1-450B-B33D-E319EAD06FF2} = {8710D3C2-A7B9-4E34-B450-7B95BF627E34}
 		{D81D2BFB-390D-43B0-9A4E-17361258C120} = {71A797DB-C44E-4D0E-8411-1A5DA6444650}
+		{25E1D552-4114-4F0D-8021-D836AEADC883} = {94A05B2C-D1F9-474B-9427-3EA3E6929BAA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D56FAB9B-8777-4F66-9743-A5DA3D2CF08E}

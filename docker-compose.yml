@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: src/CloudEng.PingPong.GameManager/Dockerfile
     ports:
-      - "51000:50001"
+      - "54000:50001"
     depends_on:
       - redis
       - placement
@@ -35,7 +35,7 @@ services:
       context: .
       dockerfile: src/CloudEng.PingPong.Player/Dockerfile
     ports:
-      - "52000:50001"
+      - "53000:50001"
     environment:
         - PlayerName=player-a
     depends_on:

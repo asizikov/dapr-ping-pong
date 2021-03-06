@@ -30,7 +30,12 @@ namespace CloudEng.PingPong.Player
             }
 
             app.UseRouting();
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseCloudEvents();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapSubscribeHandler();
+                endpoints.MapControllers();
+            });
         }
     }
 }

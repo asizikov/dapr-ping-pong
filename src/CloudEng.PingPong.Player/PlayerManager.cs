@@ -27,7 +27,8 @@ namespace CloudEng.PingPong.Player
         {
             var playerName = _configuration.GetValue<string>("PlayerName");
             _logger.LogInformation("Player started");
-            await _daprClient.SaveStateAsync("player-state-store", $"{playerName}-state", new PlayerState {Current = State.Ready},
+            await _daprClient.SaveStateAsync("player-state-store", $"{playerName}-state",
+                new PlayerState {Current = State.Ready},
                 cancellationToken: stoppingToken);
             while (!stoppingToken.IsCancellationRequested)
             {
