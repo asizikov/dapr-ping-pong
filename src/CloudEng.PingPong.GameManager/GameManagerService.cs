@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Json;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using CloudEng.PingPong.Messaging;
 using Dapr.Client;
@@ -34,17 +33,17 @@ namespace CloudEng.PingPong.GameManager
 
             gameState.Current = State.NewGame;
 
-            await _daprClient.SaveStateAsync("game-store", "game-state", gameState, cancellationToken: stoppingToken);
+            await _daprClient.SaveStateAsync("game-store", "game-state", gameState, cancellationToken: stoppingToken)
+                .ConfigureAwait(false);
 
             await _daprClient.PublishEventAsync(PubSub.GameMessaging, Topics.GameCommands,
                 new GameControlEvent {Command = GameCommand.Stop}, stoppingToken).ConfigureAwait(false);
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                await _gameManagerLoop.ExecuteAsync(stoppingToken);
+                await _gameManagerLoop.ExecuteAsync(stoppingToken).ConfigureAwait(false);
 
                 await Task.Delay(1000, stoppingToken);
-                //await httpClient.PostAsJsonAsync("/api/v1/start", 1);
             }
         }
     }

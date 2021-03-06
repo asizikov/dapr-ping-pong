@@ -29,6 +29,8 @@ services:
       - cloud-eng-ping-pong-gamemanager
     network_mode: "service:cloud-eng-ping-pong-gamemanager"
 
+  # Players
+  # =====================
   cloud-eng-pingpong-player-a:
     image: cloudengnl/pingpong-player
     build:
@@ -38,12 +40,12 @@ services:
       - "53000:50001"
     environment:
         - PlayerName=player-a
+        - OpponentName=player-b
     depends_on:
       - redis
       - placement
     networks:
       - cloud-eng-ping-pong-ntwrk
-
 
   cloud-eng-pingpong-player-a-dapr:
     image: "daprio/daprd:1.0.0"
@@ -58,6 +60,37 @@ services:
     depends_on:
       - cloud-eng-pingpong-player-a
     network_mode: "service:cloud-eng-pingpong-player-a"
+
+  cloud-eng-pingpong-player-b:
+    image: cloudengnl/pingpong-player
+    build:
+      context: .
+      dockerfile: src/CloudEng.PingPong.Player/Dockerfile
+    ports:
+      - "56000:50001"
+    environment:
+        - PlayerName=player-b
+        - OpponentName=player-a
+    depends_on:
+      - redis
+      - placement
+    networks:
+      - cloud-eng-ping-pong-ntwrk
+
+
+  cloud-eng-pingpong-player-b-dapr:
+    image: "daprio/daprd:1.0.0"
+    command: ["./daprd", 
+        "-app-id", "cloud-eng-pingpong-player-b", 
+        "-app-port", "80",
+        "-placement-host-address", "placement:50006",
+        "-components-path", "/components"
+    ]
+    volumes:
+      - "./infrastructure/components:/components:ro"
+    depends_on:
+      - cloud-eng-pingpong-player-b
+    network_mode: "service:cloud-eng-pingpong-player-b"
 
   # External services
   redis:

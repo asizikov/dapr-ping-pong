@@ -6,9 +6,4 @@
         public int PlayerA { get; set; } 
         public int PlayerB { get; set; }
     }
-
-    public enum State
-    {
-        NewGame = 0,
-    }
 }

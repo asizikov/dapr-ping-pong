@@ -15,12 +15,16 @@ namespace CloudEng.PingPong.Player.Controllers
     public class GameController : ControllerBase
     {
         private readonly ILogger<GameController> _logger;
+        private readonly IPlayerStateManager _playerStateManager;
         private readonly DaprClient _daprClient;
         private readonly IConfiguration _configuration;
         private readonly string _playerName;
-        public GameController(ILogger<GameController> logger, DaprClient daprClient, IConfiguration configuration)
+
+        public GameController(ILogger<GameController> logger, IPlayerStateManager playerStateManager,
+            DaprClient daprClient, IConfiguration configuration)
         {
             _logger = logger;
+            _playerStateManager = playerStateManager;
             _daprClient = daprClient;
             _configuration = configuration;
             _playerName = _configuration.GetValue<string>("PlayerName");
@@ -28,37 +32,41 @@ namespace CloudEng.PingPong.Player.Controllers
 
         [HttpPost("gameEvent")]
         [Topic(PubSub.GameMessaging, Topics.GameCommands)]
-        public async Task<IActionResult> StartAsync(GameControlEvent gameEvent,CancellationToken cancellationToken)
+        public async Task<IActionResult> StartAsync(GameControlEvent gameEvent, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Received {Command}", gameEvent.Command);
             switch (gameEvent.Command)
             {
                 case GameCommand.Start:
-                    await SetStateAsync(State.MyTurn, cancellationToken);
+                    if (gameEvent.AddressedTo == _playerName)
+                    {
+                        _logger.LogInformation("Starting the game");
+                        await _playerStateManager.SetStateAsync(State.MyTurn, cancellationToken).ConfigureAwait(false);
+                    }
+
                     break;
                 case GameCommand.Stop:
-                    await SetStateAsync(State.Ready, cancellationToken);
+                    await _playerStateManager.SetStateAsync(State.Ready, cancellationToken).ConfigureAwait(false);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
+
             return new OkResult();
         }
 
         [HttpPost("ping")]
-        public async Task<IActionResult> PingAsync(CancellationToken cancellationToken)
+        [Topic(PubSub.GameMessaging, Topics.Game)]
+        public async Task<IActionResult> PingAsync(GameProcessEvent gameProcessEvent,
+            CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Pinging");
+            if (gameProcessEvent.AddressedTo == _playerName)
+            {
+                _logger.LogInformation("Player {PlayerName} Got a ping {Ping}", _playerName, gameProcessEvent.Ping);
+                await _playerStateManager.SetStateAsync(State.MyTurn, cancellationToken);
+            }
+
             return new OkResult();
-        }
-
-
-        private async Task SetStateAsync(State state, CancellationToken cancellationToken)
-        {
-            var playerState = await _daprClient.GetStateAsync<PlayerState>("player-state-store", $"{_playerName}-state", ConsistencyMode.Strong, cancellationToken: cancellationToken);
-            playerState.Current = state;
-            await _daprClient.SaveStateAsync("player-state-store", $"{_playerName}-state", playerState, cancellationToken: cancellationToken);
         }
     }
 }

@@ -1,3 +1,4 @@
+using CloudEng.PingPong.Player.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +19,8 @@ namespace CloudEng.PingPong.Player
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IPlayerLoop, PlayerLoop>();
+            services.AddSingleton<IPlayersLuck, PlayersLuck>();
+            services.AddSingleton<IPlayerStateManager, PlayerStateManager>();
             services.AddControllers()
                 .AddDapr();
         }
