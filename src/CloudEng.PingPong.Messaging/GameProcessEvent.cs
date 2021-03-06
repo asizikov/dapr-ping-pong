@@ -1,8 +1,8 @@
 ﻿namespace CloudEng.PingPong.Messaging
 {
-    public class GameControlEvent
+    public class GameProcessEvent
     {
-        public GameCommand Command { get; set; }
         public string AddressedTo { get; set; }
+        public int Ping { get; set; }
     }
 }

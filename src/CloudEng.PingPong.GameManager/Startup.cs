@@ -1,11 +1,9 @@
-using CloudEng.PingPong.Player.Controllers;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
-namespace CloudEng.PingPong.Player
+namespace CloudEng.PingPong.GameManager
 {
     public class Startup
     {
@@ -15,23 +13,15 @@ namespace CloudEng.PingPong.Player
         {
             Configuration = configuration;
         }
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IPlayerLoop, PlayerLoop>();
-            services.AddSingleton<IPlayersLuck, PlayersLuck>();
-            services.AddSingleton<IPlayerStateManager, PlayerStateManager>();
             services.AddControllers()
                 .AddDapr();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
             app.UseRouting();
             app.UseCloudEvents();
             app.UseEndpoints(endpoints =>

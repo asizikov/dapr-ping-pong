@@ -12,9 +12,10 @@ namespace CloudEng.PingPong.Player
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            using var host = CreateHostBuilder(args).Build();
+            await host.RunAsync().ConfigureAwait(false);
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

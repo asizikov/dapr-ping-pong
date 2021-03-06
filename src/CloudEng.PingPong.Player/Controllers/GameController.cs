@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using CloudEng.PingPong.Messaging;
 using Dapr;
-using Dapr.Client;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -16,16 +15,13 @@ namespace CloudEng.PingPong.Player.Controllers
     {
         private readonly ILogger<GameController> _logger;
         private readonly IPlayerStateManager _playerStateManager;
-        private readonly DaprClient _daprClient;
         private readonly IConfiguration _configuration;
         private readonly string _playerName;
 
-        public GameController(ILogger<GameController> logger, IPlayerStateManager playerStateManager,
-            DaprClient daprClient, IConfiguration configuration)
+        public GameController(ILogger<GameController> logger, IPlayerStateManager playerStateManager, IConfiguration configuration)
         {
             _logger = logger;
             _playerStateManager = playerStateManager;
-            _daprClient = daprClient;
             _configuration = configuration;
             _playerName = _configuration.GetValue<string>("PlayerName");
         }

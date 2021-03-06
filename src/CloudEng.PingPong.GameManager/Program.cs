@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using Dapr.Client;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -18,6 +19,7 @@ namespace CloudEng.PingPong.GameManager
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
                 .ConfigureAppConfiguration((hostContext, configuration) =>
                     {
                         configuration.Sources.Clear();
@@ -34,7 +36,6 @@ namespace CloudEng.PingPong.GameManager
         {
             services.AddSingleton<IGameManagerLoop, GameManagerLoop>();
             services.AddHostedService<GameManagerService>();
-            services.AddSingleton(_ => new DaprClientBuilder().Build());
         }
     }
 }

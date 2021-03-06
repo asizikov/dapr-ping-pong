@@ -48,6 +48,10 @@ namespace CloudEng.PingPong.Player
                     if (_playersLuck.ShouldMissCurrentTake(playerState.Counter))
                     {
                         _logger.LogWarning("Player {PlayerName} missed their turn", playerName);
+                        await _daprClient.PublishEventAsync(PubSub.GameMessaging, Topics.Game, new PlayerLostEvent
+                        {
+                            PlayerName = playerName
+                        }, cancellationToken).ConfigureAwait(false);
                     }
                     else
                     {
@@ -58,7 +62,7 @@ namespace CloudEng.PingPong.Player
                         }, cancellationToken).ConfigureAwait(false);
                         _logger.LogInformation("Player {PlayerName} has taken their turn", playerName);
                     }
-                    
+
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
