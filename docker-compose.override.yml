@@ -2,7 +2,7 @@ version: '3.4'
 services:
   cloud-eng-ping-pong-gamemanager:
     environment:
-        - CONFIG_VA=test
+      - ASPNETCORE_URLS=http://+:80
 
   cloud-eng-pingpong-player-a:
     environment:
