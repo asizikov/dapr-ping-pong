@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         name: Checkoud code
-      - name: Build Solution
-        run: dotnet build -c Release --nologo -v q CloudEng.PingPong.sln
+      - name: Build Solution in Debug configuration
+        run: dotnet build -c Debug --nologo -v q CloudEng.PingPong.sln
       - name: Run Unit-Tests
-        run: dotnet build -c Release --nologo -v q CloudEng.PingPong.sln
+        run: dotnet test -c Debug --nologo -v q CloudEng.PingPong.sln
