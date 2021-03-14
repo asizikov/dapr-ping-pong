@@ -8,8 +8,16 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-        name: Checkoud code
+        name: Checkout code
       - name: Build Solution in Debug configuration
         run: dotnet build -c Debug --nologo -v q CloudEng.PingPong.sln
       - name: Run Unit-Tests
         run: dotnet test -c Debug --nologo -v q CloudEng.PingPong.sln
+  
+  build_docker_images:
+    name: Build Docker images
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout code
+      - run: docker build -f src/CloudEng.PingPong.Player/Dockerfile . -t  cloudengnl/pingpong-player:${{ github.run_number }}
