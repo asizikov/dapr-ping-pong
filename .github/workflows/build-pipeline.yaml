@@ -7,5 +7,7 @@ jobs:
     name: Build Project
     runs-on: ubuntu-20.04
     steps:
+      - uses: actions/checkout@v2
+        name: Checkoud code
       - name: Build Solution
         run: dotnet build -c Release --nologo -v q CloudEng.PingPong.sln            
