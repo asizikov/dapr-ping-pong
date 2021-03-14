@@ -1,0 +1,11 @@
+name: Build Project
+
+on: push
+
+jobs:
+  build_project:
+    name: Build Project
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Build Solution
+        run: dotnet build -c Release --nologo -v q CloudEng.PingPong.sln            
