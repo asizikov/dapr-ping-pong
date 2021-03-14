@@ -12,4 +12,4 @@ jobs:
       - name: Build Solution
         run: dotnet build -c Release --nologo -v q CloudEng.PingPong.sln
       - name: Run Unit-Tests
-        run: dotnet test --no-build --nologo CloudEng.PingPong.sln
+        run: dotnet build -c Release --nologo -v q CloudEng.PingPong.sln
