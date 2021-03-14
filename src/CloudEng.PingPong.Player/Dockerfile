@@ -8,6 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
 COPY ["src/CloudEng.PingPong.Player/CloudEng.PingPong.Player.csproj", "src/CloudEng.PingPong.Player/"]
+COPY ["src/CloudEng.PingPong.Messaging/CloudEng.PingPong.Messaging.csproj", "src/CloudEng.PingPong.Messaging/"]
 RUN dotnet restore "src/CloudEng.PingPong.Player/CloudEng.PingPong.Player.csproj"
 COPY . .
 WORKDIR "/src/src/CloudEng.PingPong.Player"

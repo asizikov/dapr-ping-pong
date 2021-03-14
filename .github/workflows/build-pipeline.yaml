@@ -1,0 +1,41 @@
+name: Build Project
+
+on: push
+
+jobs:
+  build_project:
+    name: Build Project
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout code
+      - name: Build Solution in Debug configuration
+        run: dotnet build -c Debug --nologo -v q CloudEng.PingPong.sln
+      - name: Run Unit-Tests
+        run: dotnet test -c Debug --nologo -v q CloudEng.PingPong.sln
+  
+  build_docker_image_player:
+    name: Build Player Docker image
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout code
+      - run: docker build -f src/CloudEng.PingPong.Player/Dockerfile . -t  cloudengnl/pingpong-player:${{ github.run_number }}
+        name: build Player image
+      - name: Upload image
+        uses: ishworkh/docker-image-artifact-upload@v1
+        with:
+          image: "cloudengnl/pingpong-player:${{ github.run_number }}"
+        
+  build_docker_image_game_manager:
+    name: Build Game Manager Docker image
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout code
+      - run: docker build -f src/CloudEng.PingPong.GameManager/Dockerfile . -t  cloudengnl/ping-pong-gamemanager:${{ github.run_number }}
+        name: build GameManager image
+      - name: Upload image
+        uses: ishworkh/docker-image-artifact-upload@v1
+        with:
+          image: "cloudengnl/ping-pong-gamemanager:${{ github.run_number }}"

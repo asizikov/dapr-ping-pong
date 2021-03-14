@@ -38,6 +38,13 @@ ProjectSection(SolutionItems) = preProject
 	deployment\kubernetes\components.yaml = deployment\kubernetes\components.yaml
 EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{6660C95E-361C-4A53-B6CB-72E77B68381B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{A44399EA-A26D-4A15-8B7C-0FBAA61A1BA1}"
+ProjectSection(SolutionItems) = preProject
+	.github\workflows\build-pipeline.yaml = .github\workflows\build-pipeline.yaml
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +88,7 @@ Global
 		{D81D2BFB-390D-43B0-9A4E-17361258C120} = {71A797DB-C44E-4D0E-8411-1A5DA6444650}
 		{25E1D552-4114-4F0D-8021-D836AEADC883} = {94A05B2C-D1F9-474B-9427-3EA3E6929BAA}
 		{46EBA769-B5DA-4DC2-9080-27861BBADD94} = {1A7515BE-C8DA-4946-8EAE-137657C4F54E}
+		{A44399EA-A26D-4A15-8B7C-0FBAA61A1BA1} = {6660C95E-361C-4A53-B6CB-72E77B68381B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D56FAB9B-8777-4F66-9743-A5DA3D2CF08E}

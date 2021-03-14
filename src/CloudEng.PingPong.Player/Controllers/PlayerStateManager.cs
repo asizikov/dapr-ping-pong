@@ -24,13 +24,23 @@ namespace CloudEng.PingPong.Player.Controllers
 
             playerState.Current = state;
             await _daprClient.SaveStateAsync("player-state-store", $"{_playerName}-state", playerState,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
+        }
+
+        public async Task SetStateAsync(State state, int counter, CancellationToken cancellationToken)
+        {
+            var playerState = await GetStateAsync(cancellationToken).ConfigureAwait(false);
+
+            playerState.Current = state;
+            playerState.Counter = counter;
+            await _daprClient.SaveStateAsync("player-state-store", $"{_playerName}-state", playerState,
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         public async Task<PlayerState> GetStateAsync(CancellationToken cancellationToken)
         {
             var playerState = await _daprClient.GetStateAsync<PlayerState>("player-state-store", $"{_playerName}-state",
-                ConsistencyMode.Strong, cancellationToken: cancellationToken);
+                ConsistencyMode.Strong, cancellationToken: cancellationToken).ConfigureAwait(false);
             if (playerState is null)
             {
                 return new PlayerState();
