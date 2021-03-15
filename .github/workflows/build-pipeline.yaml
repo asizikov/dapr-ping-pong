@@ -39,6 +39,7 @@ jobs:
         uses: ishworkh/docker-image-artifact-upload@v1
         with:
           image: "cloudengnl/ping-pong-gamemanager:${{ github.run_number }}"
+          
   public_docker_images:
     name: Publish Docker images
     runs-on: ubuntu-20.04
@@ -52,3 +53,11 @@ jobs:
         uses: ishworkh/docker-image-artifact-download@v1
         with:
           image: "cloudengnl/ping-pong-gamemanager:${{ github.run_number }}"       
+          
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_API_KEY }}
+          repository: cloudengnl/ping-pong-gamemanager
+          tag_with_ref: true
