@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
@@ -21,6 +22,16 @@ namespace CloudEng.PingPong.Player
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
+                .ConfigureAppConfiguration((hostContext, configuration) =>
+                    {
+                        configuration.Sources.Clear();
+
+                        configuration
+                            .SetBasePath(Directory.GetCurrentDirectory())
+                            .AddJsonFile("appsettings.json", true, true)
+                            .AddEnvironmentVariables();
+                    }
+                )
                 .ConfigureServices(services => services.AddHostedService<PlayerManager>());
     }
 }

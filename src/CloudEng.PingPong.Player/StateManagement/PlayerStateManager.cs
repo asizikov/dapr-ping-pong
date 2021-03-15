@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Dapr.Client;
 using Microsoft.Extensions.Configuration;
 
-namespace CloudEng.PingPong.Player.Controllers
+namespace CloudEng.PingPong.Player.StateManagement
 {
     public class PlayerStateManager : IPlayerStateManager
     {

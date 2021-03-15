@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using CloudEng.PingPong.Player.Configuration;
-using CloudEng.PingPong.Player.Controllers;
-using Dapr.Client;
+using CloudEng.PingPong.Player.Messaging;
+using CloudEng.PingPong.Player.StateManagement;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using Moq;
@@ -14,8 +13,8 @@ namespace CloudEng.PingPong.Player.Tests
     public class PlayerLoopTests
     {
         private readonly PlayerLoop _playerLoop;
-        private readonly Mock<DaprClient> _mockDaprClient = new();
         private readonly Mock<IPlayerStateManager> _mockPlayerStateManager = new();
+        private readonly Mock<IGameEventManager> _mockGameEventManager = new();
         private readonly IOptions<PlayerConfigOptions> _playerConfig;
         private readonly Mock<IPlayersLuck> _mockPlayersLuck = new();
         private readonly PlayerConfigOptions _playerConfigOptions;
@@ -29,7 +28,7 @@ namespace CloudEng.PingPong.Player.Tests
                 PlayerName = "player-x"
             };
             _playerConfig = Options.Create(_playerConfigOptions);
-            _playerLoop = new PlayerLoop(NullLogger<PlayerLoop>.Instance, _mockDaprClient.Object,
+            _playerLoop = new PlayerLoop(NullLogger<PlayerLoop>.Instance, _mockGameEventManager.Object,
                 _mockPlayerStateManager.Object, _playerConfig, _mockPlayersLuck.Object);
         }
 

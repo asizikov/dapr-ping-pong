@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using CloudEng.PingPong.Player.StateManagement;
 using Dapr.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -29,11 +30,11 @@ namespace CloudEng.PingPong.Player
             _logger.LogInformation("Player started");
             await _daprClient.SaveStateAsync("player-state-store", $"{playerName}-state",
                 new PlayerState {Current = State.Ready},
-                cancellationToken: stoppingToken);
+                cancellationToken: stoppingToken).ConfigureAwait(false);
             while (!stoppingToken.IsCancellationRequested)
             {
-                await _playerLoop.ExecuteIterationAsync(playerName, stoppingToken);
-                await Task.Delay(1000, stoppingToken);
+                await _playerLoop.ExecuteIterationAsync(playerName, stoppingToken).ConfigureAwait(false);
+                await Task.Delay(1000, stoppingToken).ConfigureAwait(false);
             }
         }
     }

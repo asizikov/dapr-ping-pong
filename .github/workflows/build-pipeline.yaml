@@ -39,3 +39,16 @@ jobs:
         uses: ishworkh/docker-image-artifact-upload@v1
         with:
           image: "cloudengnl/ping-pong-gamemanager:${{ github.run_number }}"
+  public_docker_images:
+    name: Publish Docker images
+    runs-on: ubuntu-20.04
+    needs: [build_project, build_docker_image_player, build_docker_image_game_manager ]
+    steps:
+      - name: Download Player image
+        uses: ishworkh/docker-image-artifact-download@v1
+        with:
+          image: "cloudengnl/pingpong-player:${{ github.run_number }}"
+      - name: Download GameManager image
+        uses: ishworkh/docker-image-artifact-download@v1
+        with:
+          image: "cloudengnl/ping-pong-gamemanager:${{ github.run_number }}"       

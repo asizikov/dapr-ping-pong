@@ -1,4 +1,4 @@
-namespace CloudEng.PingPong.Player
+namespace CloudEng.PingPong.Player.StateManagement
 {
     public class PlayerState
     {

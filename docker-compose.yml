@@ -39,8 +39,8 @@ services:
     ports:
       - "53000:50001"
     environment:
-        - PlayerName=player-a
-        - OpponentName=player-b
+        - PlayerConfig__PlayerName=player-a
+        - PlayerConfig__OpponentName=player-b
     depends_on:
       - redis
       - placement
@@ -69,8 +69,8 @@ services:
     ports:
       - "56000:50001"
     environment:
-        - PlayerName=player-b
-        - OpponentName=player-a
+        - PlayerConfig__PlayerName=player-b
+        - PlayerConfig__OpponentName=player-a
     depends_on:
       - redis
       - placement
