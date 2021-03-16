@@ -58,4 +58,4 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_API_KEY }}  
-      - run: docker image push --all-tags cloudengnl/ping-pong-gamemanager:0.0.${{ github.run_number }}
+      - run: docker image push cloudengnl/ping-pong-gamemanager:0.0.${{ github.run_number }}
