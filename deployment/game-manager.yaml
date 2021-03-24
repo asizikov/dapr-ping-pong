@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: game-manager
+  name: game-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: game-manager
+  template:
+    metadata:
+      labels:
+        app: game-manager
+      annotations:
+          dapr.io/enabled: "true"
+          dapr.io/app-id: "cloud-eng-ping-pong-gamemanager"
+          dapr.io/app-port: "80"
+    spec:
+      containers:
+      - image: cloudengnl/ping-pong-gamemanager:0.0.16
+        name: ping-pong-gamemanager

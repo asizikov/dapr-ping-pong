@@ -36,6 +36,7 @@ ProjectSection(SolutionItems) = preProject
 	deployment\kubernetes\redis.yaml = deployment\kubernetes\redis.yaml
 	deployment\kubernetes\redis-service.yaml = deployment\kubernetes\redis-service.yaml
 	deployment\kubernetes\components.yaml = deployment\kubernetes\components.yaml
+	deployment\game-manager.yaml = deployment\game-manager.yaml
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{6660C95E-361C-4A53-B6CB-72E77B68381B}"
